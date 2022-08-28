@@ -1,4 +1,4 @@
-import gql from 'apollo-server';
+import { gql } from 'apollo-server';
 
 const typeDefs = gql`
     type User {
@@ -7,15 +7,45 @@ const typeDefs = gql`
         login: String!
         email: String!
         password: String!
-        todos: [{
-            id: ID!
-            date: String!
-            todo: String!
-        }]! 
+        todos: [Todo]! 
+    }
+
+    type Todo {
+        id: ID!
+        date: String!
+        todo: String!
+    }
+
+    input LoginInput{
+        email: String!
+    }
+
+    input AuthInput {
+        id: ID!
+    }
+
+    input NewUserInput {
+        name: String!
+        login: String!
+        email: String!
+        password: String!
+    }
+
+    input NewTodoInput {
+        user_id: ID!
+        date: String!
+        todo: String!
     }
 
     type Query {
-        login()
-        user()???????????????
+        login(input: LoginInput): User!
+        # auth(input: AuthInput): User!
+    }
+
+    type Mutation {
+        newUser(input: NewUserInput): User
+        # newTodo(input: NewTodoInput): Todo!
     }
 `;
+
+export default typeDefs;
