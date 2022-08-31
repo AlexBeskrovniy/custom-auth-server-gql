@@ -1,35 +1,26 @@
 import 'dotenv/config';
 import { ApolloServer } from 'apollo-server';
-import {
-    ApolloServerPluginLandingPageLocalDefault
-  } from "apollo-server-core";
+import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
 import mongoose from 'mongoose';
 
-import typeDefs from './types/user.mjs';
-import { resolvers } from './resolvers/index.mjs';
+import typeDefs from './types.mjs';
+import { resolvers } from './resolvers.mjs';
 import { User } from './models/index.mjs';
-
-const apolloHeaders = (req, res, next) => {
-    res.headers('Access-Control-Allow-Origin', "https://studio.apollographql.com");
-    res.headers('Access-Control-Allow-Credentials', true);
-    next();
-}
 
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context() {
-        return User;
-    },
-    // cors: {
-    //     origin: ["https://www.your-app.example", "https://studio.apollographql.com"]
-    //   },
+    context: ({ req, res }) => ({
+        req,
+        res,
+        User,
+      }),
+    // csrfPrevention: true,
+    // cache: 'bounded',
     // plugins: [
     //     ApolloServerPluginLandingPageLocalDefault({ embed: true }),
     // ]
 });
-
-//server.use(apolloHeaders);
 
 
 //MongoDB Connection

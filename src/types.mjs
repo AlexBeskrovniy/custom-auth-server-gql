@@ -7,7 +7,8 @@ const typeDefs = gql`
         login: String!
         email: String!
         password: String!
-        todos: [Todo]! 
+        todos: [Todo]!
+        token: String
     }
 
     type Todo {
@@ -18,10 +19,12 @@ const typeDefs = gql`
 
     input LoginInput{
         email: String!
+        password: String!
     }
 
     input AuthInput {
         id: ID!
+        token: String!
     }
 
     input NewUserInput {
@@ -46,6 +49,7 @@ const typeDefs = gql`
         newUser(input: NewUserInput): User
         # newTodo(input: NewTodoInput): Todo!
     }
-`;
+`; 
+// You need create Auth type
 
 export default typeDefs;
