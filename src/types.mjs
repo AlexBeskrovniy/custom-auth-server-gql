@@ -42,12 +42,12 @@ const typeDefs = gql`
 
     type Query {
         login(input: LoginInput): User!
-        # auth(input: AuthInput): User!
+        auth(input: AuthInput): User!
     }
 
     type Mutation {
         newUser(input: NewUserInput): User
-        # newTodo(input: NewTodoInput): Todo!
+        loginUser(input: LoginInput): User!
     }
 `; 
 // You need create Auth type

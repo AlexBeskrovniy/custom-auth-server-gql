@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import { ApolloServer } from 'apollo-server';
-import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
 import mongoose from 'mongoose';
 
 import typeDefs from './types.mjs';
@@ -14,12 +13,7 @@ const server = new ApolloServer({
         req,
         res,
         User,
-      }),
-    // csrfPrevention: true,
-    // cache: 'bounded',
-    // plugins: [
-    //     ApolloServerPluginLandingPageLocalDefault({ embed: true }),
-    // ]
+    }),
 });
 
 
